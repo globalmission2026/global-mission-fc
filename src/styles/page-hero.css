@@ -1,0 +1,124 @@
+/* ==========================================================================
+   PAGE HERO — sub-page gradient banner (extracted from gmfci_page_hero_shortcode)
+   ========================================================================== */
+
+.gmfci-page-hero {
+    background: linear-gradient(135deg, #4A1110 0%, #6B1A18 50%, #E47A2B 100%);
+    color: #fff;
+    padding: clamp(64px, 10vw, 140px) 0 clamp(64px, 8vw, 120px);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.gmfci-page-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.10;
+    background: radial-gradient(circle at 80% 20%, #fff, transparent 60%);
+    pointer-events: none;
+}
+
+.gmfci-page-hero .gmfci-particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.gmfci-page-hero .shell {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.gmfci-page-hero .gmfci-page-eyebrow {
+    display: inline-block;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #F0A058;
+    margin-bottom: 12px;
+}
+
+.gmfci-page-hero h1 {
+    font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: #fff;
+    max-width: 18ch;
+    margin: 14px 0 18px;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+}
+
+.gmfci-page-hero .gmfci-page-lead {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.92);
+    max-width: 60ch;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.gmfci-page-hero .gmfci-hero-btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+}
+
+.gmfci-page-hero .gmfci-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: transform 0.2s cubic-bezier(.2, .8, .2, 1), background 0.2s cubic-bezier(.2, .8, .2, 1);
+}
+
+.gmfci-page-hero .gmfci-hero-btn-primary {
+    background: linear-gradient(135deg, #A85410, #B45E14);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(168, 84, 16, 0.35);
+}
+
+.gmfci-page-hero .gmfci-hero-btn-primary:hover {
+    transform: translateY(-1px);
+    color: #fff;
+}
+
+.gmfci-page-hero .gmfci-hero-btn-ghost {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.30);
+    backdrop-filter: blur(6px);
+}
+
+.gmfci-page-hero .gmfci-hero-btn-ghost:hover {
+    background: rgba(255,255,255,0.20);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 767px) {
+    .gmfci-page-hero {
+        padding: 80px 0 60px;
+    }
+    .gmfci-page-hero h1 {
+        max-width: 100%;
+    }
+}

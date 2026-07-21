@@ -1,0 +1,152 @@
+/* ==========================================================================
+   SINGLE EVENT PAGE REDESIGN - GLOBAL MISSION FCI
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600&display=swap');
+
+/* --- Hide Enfold Default Titles & Sidebars for a cleaner look --- */
+.single-tribe_events .title_container {
+    display: none !important;
+}
+
+/* --- Container & Typography --- */
+.single-tribe_events #main .container_wrap {
+    background-color: #F9FAFB !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.single-tribe_events .tribe-events-single {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    margin-top: 40px !important;
+    margin-bottom: 60px !important;
+}
+
+/* --- The Event Title --- */
+.single-tribe_events .tribe-events-single-event-title {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 42px !important;
+    font-weight: 800 !important;
+    color: #111827 !important;
+    text-align: center;
+    margin-bottom: 20px !important;
+    line-height: 1.2 !important;
+}
+
+/* --- The Event Image (Un-Zoomed, Original Proportions) --- */
+.single-tribe_events .tribe-events-event-image {
+    margin: 30px 0 40px 0 !important;
+    text-align: center;
+    background: #111827;
+    border-radius: 12px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.single-tribe_events .tribe-events-event-image img {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 600px !important;
+    object-fit: contain !important; /* Forces image to fit without cropping/zooming */
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* --- Event Meta Data Box (Dates, Times, Venues) --- */
+.single-tribe_events .tribe-events-meta-group {
+    background: #F3F4F6 !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    border: none !important;
+    margin-bottom: 40px !important;
+}
+
+.single-tribe_events .tribe-events-meta-group .tribe-events-single-section-title {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 600 !important;
+    color: #F59E0B !important; /* Gold accent */
+    margin-bottom: 20px !important;
+    border-bottom: 2px solid #E5E7EB;
+    padding-bottom: 10px;
+}
+
+.single-tribe_events .tribe-events-meta-group dl dt {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    color: #4B5563 !important;
+    text-transform: uppercase;
+    font-size: 13px !important;
+    letter-spacing: 0.5px;
+}
+
+.single-tribe_events .tribe-events-meta-group dl dd {
+    font-family: 'Inter', sans-serif !important;
+    color: #111827 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    margin-bottom: 15px !important;
+}
+
+/* --- Event Description Content --- */
+.single-tribe_events .tribe-events-single-event-description {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 18px !important;
+    line-height: 1.8 !important;
+    color: #374151 !important;
+    padding: 0 20px;
+}
+
+/* --- Navigation Links (To and Fro) --- */
+.single-tribe_events .tribe-events-sub-nav {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-top: 50px !important;
+    padding-top: 30px !important;
+    border-top: 1px solid #E5E7EB !important;
+}
+
+.single-tribe_events .tribe-events-sub-nav li a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #004aad !important; /* Deep Blue */
+    color: #ffffff !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
+    border-radius: 50px;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 10px rgba(0, 74, 173, 0.3);
+}
+
+.single-tribe_events .tribe-events-sub-nav li a:hover {
+    background: #F59E0B !important; /* Gold on hover */
+    color: #111827 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(245, 158, 11, 0.4);
+}
+
+.single-tribe_events .tribe-events-back {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.single-tribe_events .tribe-events-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #004aad !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 16px;
+    text-decoration: none !important;
+}
+
+.single-tribe_events .tribe-events-back a:hover {
+    color: #F59E0B !important;
+}
