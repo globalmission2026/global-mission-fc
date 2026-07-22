@@ -1,4 +1,3 @@
-export const runtime = "edge";
 import type { Metadata } from "next";
 import { Inter, Outfit, Fraunces } from "next/font/google";
 import { ErrorBoundary } from "react-error-boundary";
