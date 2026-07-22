@@ -1,7 +1,7 @@
 /* Event Highlights Section */
 .gmfci-event-highlights {
   padding: 80px 0;
-  background-color: #f9fafb; /* Light background for contrast */
+  background-color: var(--color-gray-50); /* Light background for contrast */
   position: relative;
 }
 
@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 50px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-gray-200);
   padding-bottom: 20px;
 }
 
@@ -24,12 +24,12 @@
   font-family: var(--font-outfit), sans-serif;
   font-size: 40px;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-gray-900);
   margin: 0 0 10px 0;
 }
 
 .gmfci-eh-subtitle {
-  color: #6b7280;
+  color: var(--color-gray-500);
   font-size: 18px;
   margin: 0;
 }
@@ -39,8 +39,8 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background-color: #f59e0b; /* Amber */
-  color: white;
+  background-color: var(--color-gold-light); /* Amber */
+  color: var(--color-white);
   font-weight: 600;
   border-radius: 8px;
   text-decoration: none;
@@ -66,7 +66,7 @@
 /* Event Card */
 .gmfci-eh-card {
   display: flex;
-  background: white;
+  background: var(--color-white);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -82,7 +82,7 @@
   position: relative;
   flex: 0 0 40%;
   min-height: 250px;
-  background-color: #111827;
+  background-color: var(--color-gray-900);
   overflow: hidden;
 }
 
@@ -102,8 +102,8 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  background: #f59e0b;
-  color: white;
+  background: var(--color-gold-light);
+  color: var(--color-white);
   border-radius: 8px;
   padding: 8px;
   text-align: center;
@@ -137,17 +137,17 @@
 .gmfci-eh-event-title {
   font-size: 24px;
   font-weight: 700;
-  color: #111827;
+  color: var(--color-gray-900);
   margin: 0 0 15px 0;
   line-height: 1.3;
 }
 
 .gmfci-eh-card:hover .gmfci-eh-event-title {
-  color: #f59e0b;
+  color: var(--color-gold-light);
 }
 
 .gmfci-eh-event-excerpt {
-  color: #4b5563;
+  color: var(--color-gray-600);
   font-size: 15px;
   line-height: 1.6;
   margin: 0 0 20px 0;
@@ -159,7 +159,7 @@
 
 .gmfci-eh-read-more {
   margin-top: auto;
-  color: #f59e0b;
+  color: var(--color-gold-light);
   font-weight: 600;
   text-decoration: none;
   display: inline-flex;
@@ -183,8 +183,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #374151;
-  color: #9ca3af;
+  background-color: var(--color-gray-700);
+  color: var(--color-gray-400);
 }
 
 .gmfci-eh-no-img svg {

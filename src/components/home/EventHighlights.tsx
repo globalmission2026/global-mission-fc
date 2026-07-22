@@ -23,9 +23,9 @@ export default function EventHighlights() {
       try {
         const now = new Date().toISOString();
         // Fetch up to 2 upcoming events
-        const { data, error } = await supabase
+          const { data, error } = await supabase
           .from('events')
-          .select('*')
+          .select('id, title, start_date, excerpt, image_url, slug')
           .gte('start_date', now)
           .order('start_date', { ascending: true })
           .limit(2);

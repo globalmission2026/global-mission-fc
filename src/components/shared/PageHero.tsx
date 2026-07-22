@@ -20,14 +20,9 @@ export default function PageHero({
   btn1Url,
   btn2Text,
   btn2Url,
-  backgroundImage = "/images/default-hero.jpg"
 }: PageHeroProps) {
   return (
-    <section 
-      className="gmfci-page-hero"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
-      <div className="gmfci-overlay"></div>
+    <section className="gmfci-page-hero">
       
       {/* Particles Canvas */}
       <ParticlesCanvas />

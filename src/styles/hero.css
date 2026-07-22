@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: var(--color-white);
     overflow: hidden;
     z-index: 1;
 }
@@ -54,7 +54,7 @@
     background: rgba(245, 158, 11, 0.2);
     border: 1px solid rgba(245, 158, 11, 0.5);
     border-radius: 50px;
-    color: #F59E0B;
+    color: var(--color-gold-light);
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 2px;
@@ -69,7 +69,7 @@
     line-height: 1.1;
     margin-bottom: 24px;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    color: #ffffff !important;
+    color: var(--color-white) !important;
 }
 
 .gmfci-word-rotator {
@@ -81,7 +81,7 @@
 }
 
 .gmfci-highlight {
-    color: #F59E0B;
+    color: var(--color-gold-light);
 }
 
 .gmfci-word {
@@ -111,7 +111,7 @@
     font-size: clamp(1.1rem, 2vw, 1.3rem);
     line-height: 1.6;
     margin-bottom: 40px;
-    color: #D1D5DB !important;
+    color: var(--color-gray-300) !important;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     max-width: 700px;
     margin-left: auto;
@@ -144,8 +144,8 @@
 }
 
 .gmfci-btn-primary {
-    background: #F59E0B;
-    color: #111827 !important;
+    background: var(--color-gold-light);
+    color: var(--color-gray-900) !important;
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
 }
 
@@ -157,7 +157,7 @@
 
 .gmfci-btn-secondary {
     background: rgba(255, 255, 255, 0.1);
-    color: #ffffff !important;
+    color: var(--color-white) !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
 }
@@ -186,8 +186,8 @@
 .gmfci-scroll-arrow {
     width: 20px;
     height: 20px;
-    border-right: 2px solid #F59E0B;
-    border-bottom: 2px solid #F59E0B;
+    border-right: 2px solid var(--color-gold-light);
+    border-bottom: 2px solid var(--color-gold-light);
     transform: rotate(45deg);
     margin: 10px auto 0;
     animation: gmfciBounce 2s infinite;
@@ -218,14 +218,14 @@
     display: block;
     font-size: 2.5rem;
     font-weight: 800;
-    color: #F59E0B;
+    color: var(--color-gold-light);
     margin-bottom: 5px;
     line-height: 1;
 }
 
 .gmfci-stat-label {
     font-size: 13px;
-    color: #D1D5DB;
+    color: var(--color-gray-300);
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;

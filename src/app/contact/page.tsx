@@ -3,6 +3,7 @@
 import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
 import { supabase } from "@/lib/supabase";
+import { CONTACT, SOCIAL } from "@/lib/config";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -54,9 +55,9 @@ export default function ContactPage() {
                 <div>
                   <h4>Phone</h4>
                   <p>
-                    <a href="tel:+15127856994">+1 (512) 785 6994</a><br />
-                    <a href="tel:+254715493666">+254 715 493 666</a><br />
-                    <a href="tel:+254710642232">+254 710 642 232</a>
+                    <a href={`tel:${CONTACT.phones[0].replace(/\s+/g, '')}`}>{CONTACT.phones[0]}</a><br />
+                    <a href={`tel:${CONTACT.phones[1].replace(/\s+/g, '')}`}>{CONTACT.phones[1]}</a><br />
+                    <a href={`tel:${CONTACT.phones[2].replace(/\s+/g, '')}`}>{CONTACT.phones[2]}</a>
                   </p>
                 </div>
               </div>
@@ -65,7 +66,7 @@ export default function ContactPage() {
                 <div className="gmfci-contact-card-icon email">📧</div>
                 <div>
                   <h4>Email</h4>
-                  <p><a href="mailto:globalmissionfc@gmail.com">globalmissionfc@gmail.com</a></p>
+                  <p><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
                 </div>
               </div>
 
@@ -73,7 +74,7 @@ export default function ContactPage() {
                 <div className="gmfci-contact-card-icon address">📮</div>
                 <div>
                   <h4>Postal Address</h4>
-                  <p>P.O. Box 444 – 10100, Kenya<br />Global Mission for Christ International</p>
+                  <p>{CONTACT.poBox}<br />Global Mission for Christ International</p>
                 </div>
               </div>
 
@@ -82,10 +83,10 @@ export default function ContactPage() {
                 <div>
                   <h4>Follow Us</h4>
                   <div className="gmfci-contact-social">
-                    <a href="https://www.facebook.com/profile.php?id=61591907680791" target="_blank" rel="noopener noreferrer" className="fb" aria-label="Facebook">f</a>
-                    <a href="https://www.youtube.com/@GlobalMissionfc" target="_blank" rel="noopener noreferrer" className="yt" aria-label="YouTube">▶</a>
-                    <a href="https://www.instagram.com/globalmissionfc/" target="_blank" rel="noopener noreferrer" className="ig" aria-label="Instagram">◎</a>
-                    <a href="https://wa.me/254715493666" target="_blank" rel="noopener noreferrer" className="wa" aria-label="WhatsApp">✆</a>
+                    <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" className="fb" aria-label="Facebook">f</a>
+                    <a href={`https://www.youtube.com/${SOCIAL.youtube}`} target="_blank" rel="noopener noreferrer" className="yt" aria-label="YouTube">▶</a>
+                    <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="ig" aria-label="Instagram">◎</a>
+                    <a href={`https://wa.me/${SOCIAL.whatsapp}`} target="_blank" rel="noopener noreferrer" className="wa" aria-label="WhatsApp">✆</a>
                   </div>
                 </div>
               </div>

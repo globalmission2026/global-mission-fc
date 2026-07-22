@@ -1,7 +1,6 @@
-const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
+import { validateUpload, ALLOWED_TYPES, MAX_SIZE } from './upload-validation'
 
-const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif']
-const MAX_SIZE = 5 * 1024 * 1024
+const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
 
 export class UploadError extends Error {
   constructor(
@@ -13,17 +12,10 @@ export class UploadError extends Error {
 }
 
 function validateFile(file: File): void {
-  if (!ALLOWED_TYPES.includes(file.type)) {
-    throw new UploadError(
-      `Invalid file type: ${file.type}. Allowed: ${ALLOWED_TYPES.join(', ')}`,
-      'INVALID_TYPE'
-    )
-  }
-  if (file.size > MAX_SIZE) {
-    throw new UploadError(
-      `File too large: ${(file.size / 1024 / 1024).toFixed(1)}MB. Max: ${MAX_SIZE / 1024 / 1024}MB`,
-      'FILE_TOO_LARGE'
-    )
+  const result = validateUpload(file)
+  if (!result.valid) {
+    const code = file.size > MAX_SIZE ? 'FILE_TOO_LARGE' : 'INVALID_TYPE'
+    throw new UploadError(result.error!, code)
   }
 }
 

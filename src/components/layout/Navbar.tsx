@@ -23,8 +23,7 @@ export default function Navbar() {
 
         {/* Logo / Brand */}
         <Link href="/" className="gmfci-logo-link" onClick={() => setMenuOpen(false)}>
-          {/* Logo image goes here when available */}
-          {/* <img src="/images/gmfc-logo.png" alt="Global Mission FCI Logo" /> */}
+          <img src="/images/gmfc-logo.png" alt="Global Mission for Christ International" className="gmfci-logo-img" />
           <div id="gmfci-site-brand">
             <span className="gmfci-brand-top">Global Mission</span>
             <span className="gmfci-brand-bottom">For Christ International</span>
@@ -38,7 +37,7 @@ export default function Navbar() {
         <nav aria-label="Main navigation">
           <ul className={`gmfci-main-nav${menuOpen ? " open" : ""}`}>
             {navItems.map((item) => (
-              <li key={item.href} className={pathname === item.href ? "active" : ""}>
+              <li key={item.href} className={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href)) ? "active" : ""}>
                 <Link href={item.href} onClick={() => setMenuOpen(false)}>
                   {item.label}
                 </Link>

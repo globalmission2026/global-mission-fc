@@ -14,24 +14,14 @@
 
 /* ── 2. Root / Tokens ────────────────────────────────────────────────── */
 .gmfci-custom-footer {
-    --gmfci-orange:     #E47A2B;
-    --gmfci-orange-dk:  #B45E14;
-    --gmfci-slate-900:  #0f172a;
-    --gmfci-slate-800:  #1e293b;
-    --gmfci-slate-700:  #334155;
-    --gmfci-slate-500:  #64748b;
-    --gmfci-slate-400:  #94a3b8;
-    --gmfci-slate-300:  #cbd5e1;
-    --gmfci-slate-100:  #f1f5f9;
-    --gmfci-white:      #ffffff;
     --gmfci-radius:     8px;
     --gmfci-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── 3. Outer wrapper ────────────────────────────────────────────────── */
 .gmfci-custom-footer {
-    background: var(--gmfci-slate-900);
-    color: var(--gmfci-slate-300);
+    background: var(--color-gray-900);
+    color: var(--color-gray-300);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: 15px;
     line-height: 1.6;
@@ -130,7 +120,7 @@
 
 /* ── 7. Column Headings ──────────────────────────────────────────────── */
 .gmfci-footer-col .col-title {
-    color: var(--gmfci-white);
+    color: var(--color-white);
     font-family: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
     font-size: 19px;
     font-weight: 600;
@@ -147,7 +137,7 @@
     left: 0;
     width: 36px;
     height: 2px;
-    background: var(--gmfci-orange);
+    background: var(--color-orange);
     border-radius: 2px;
     transition: width var(--gmfci-transition);
 }
@@ -191,29 +181,29 @@
 
 .gmfci-contact-detail {
     font-size: 14px;
-    color: var(--gmfci-slate-400);
+    color: var(--color-gray-400);
     line-height: 1.5;
 }
 
 .gmfci-contact-detail a {
-    color: var(--gmfci-slate-300);
+    color: var(--color-gray-300);
     text-decoration: none;
     transition: color var(--gmfci-transition);
 }
 
 .gmfci-contact-detail a:hover {
-    color: var(--gmfci-orange);
+    color: var(--color-orange);
 }
 
 .gmfci-footer-mission {
     margin-top: 24px;
     padding: 14px 16px;
-    border-left: 2px solid var(--gmfci-orange);
+    border-left: 2px solid var(--color-orange);
     background: rgba(255, 255, 255, 0.03);
     border-radius: 0 6px 6px 0;
     font-size: 13px;
     font-style: italic;
-    color: var(--gmfci-slate-400);
+    color: var(--color-gray-400);
     line-height: 1.65;
 }
 
@@ -232,7 +222,7 @@
 }
 
 .gmfci-footer-links a {
-    color: var(--gmfci-slate-400);
+    color: var(--color-gray-400);
     text-decoration: none;
     font-size: 14px;
     padding: 6px 0;
@@ -245,7 +235,7 @@
 
 .gmfci-footer-links a::before {
     content: "›";
-    color: var(--gmfci-orange);
+    color: var(--color-orange);
     font-weight: 700;
     font-size: 16px;
     line-height: 1;
@@ -255,7 +245,7 @@
 }
 
 .gmfci-footer-links a:hover {
-    color: var(--gmfci-white);
+    color: var(--color-white);
     transform: translateX(4px);
 }
 
@@ -287,12 +277,12 @@
 }
 
 .gmfci-service-row .svc-name {
-    color: var(--gmfci-slate-300);
+    color: var(--color-gray-300);
     font-weight: 400;
 }
 
 .gmfci-service-row .svc-time {
-    color: var(--gmfci-orange);
+    color: var(--color-orange);
     font-weight: 700;
     font-size: 13px;
     letter-spacing: 0.02em;
@@ -300,7 +290,7 @@
 
 /* ── 11. Subscribe Form ──────────────────────────────────────────────── */
 .gmfci-subscribe-heading {
-    color: var(--gmfci-slate-300);
+    color: var(--color-gray-300);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -318,7 +308,7 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.10);
-    color: var(--gmfci-white);
+    color: var(--color-white);
     padding: 11px 14px;
     border-radius: var(--gmfci-radius);
     font-size: 14px;
@@ -328,19 +318,19 @@
 }
 
 .gmfci-subscribe-form input[type="email"]::placeholder {
-    color: var(--gmfci-slate-500);
+    color: var(--color-gray-500);
 }
 
 .gmfci-subscribe-form input[type="email"]:focus {
     outline: none;
-    border-color: var(--gmfci-orange);
+    border-color: var(--color-orange);
     background: rgba(255, 255, 255, 0.08);
 }
 
 .gmfci-subscribe-btn {
     width: 100%;
-    background: linear-gradient(135deg, var(--gmfci-orange-dk), var(--gmfci-orange));
-    color: var(--gmfci-white);
+    background: linear-gradient(135deg, var(--color-orange-dark), var(--color-orange));
+    color: var(--color-white);
     border: none;
     padding: 11px 18px;
     border-radius: var(--gmfci-radius);
@@ -373,7 +363,7 @@
     top: 0;
     width: 120px;
     height: 100%;
-    background: var(--gmfci-orange);
+    background: var(--color-orange);
     opacity: 0.4;
 }
 
@@ -400,7 +390,7 @@
 }
 
 .gmfci-copyright strong {
-    color: var(--gmfci-white);
+    color: var(--color-white);
     font-weight: 600;
 }
 
@@ -427,9 +417,9 @@
 }
 
 .gmfci-social-link:hover {
-    background: var(--gmfci-orange);
-    border-color: var(--gmfci-orange);
-    color: var(--gmfci-white);
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: var(--color-white);
     transform: translateY(-3px);
     box-shadow: 0 6px 16px rgba(228, 122, 43, 0.5);
 }
@@ -445,7 +435,7 @@
 }
 
 .gmfci-back-top:hover {
-    color: var(--gmfci-orange);
+    color: var(--color-orange);
 }
 
 /* ── 15. Responsive ──────────────────────────────────────────────────── */

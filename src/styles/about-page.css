@@ -3,9 +3,9 @@
    ========================================================================== */
 
 .gmfci-about-wrap {
-    background: #FAF9F6;
-    font-family: 'Outfit', 'Inter', sans-serif;
-    color: #1F2937;
+    background: var(--color-off-white);
+    font-family: var(--font-body);
+    color: var(--color-gray-800);
     overflow: hidden;
 }
 
@@ -22,7 +22,7 @@
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #F59E0B;
+    color: var(--color-gold-light);
     margin-bottom: 16px;
 }
 
@@ -30,7 +30,7 @@
     text-align: center;
     font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     font-weight: 800;
-    color: #111827;
+    color: var(--color-gray-900);
     margin: 0 0 60px;
     line-height: 1.2;
 }
@@ -100,7 +100,7 @@
 
 /* ---- Values Section ---- */
 .gmfci-values-section {
-    background: #F3F4F6;
+    background: var(--color-gray-100);
     padding: 80px 40px;
 }
 
@@ -394,8 +394,10 @@
     line-height: 1.6;
 }
 
-.gmfci-about-contact .gmfci-contact-item a {
+.gmfci-about-contact .gmfci-contact-item a,
+.gmfci-about-contact .gmfci-contact-link {
     color: #4B5563 !important;
+    text-decoration: none;
 }
 
 /* ---- Responsive ---- */

@@ -19,8 +19,8 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  color: #1A1612;
-  background: #F8F1E5;
+  color: var(--color-dark);
+  background: var(--color-cream);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -102,18 +102,4 @@ a {
   }
 }
 
-/* Navbar — give button fix for Next.js Link wrapper */
-#top #header .av-main-nav > li > a[href="/give"] .avia-menu-text,
-.main_menu .av-main-nav > li:last-child > a .avia-menu-text {
-  color: #111827;
-  font-weight: 700;
-}
 
-#top #header .av-main-nav > li > a[href="/give"],
-.main_menu .av-main-nav > li:last-child > a {
-  background: #F59E0B;
-  padding: 10px 24px;
-  border-radius: 50px;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
-  margin-left: 10px;
-}

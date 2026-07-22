@@ -4,7 +4,7 @@
 
 .gmfci-page-hero {
     background: linear-gradient(135deg, #4A1110 0%, #6B1A18 50%, #E47A2B 100%);
-    color: #fff;
+    color: var(--color-white);
     padding: clamp(64px, 10vw, 140px) 0 clamp(64px, 8vw, 120px);
     position: relative;
     overflow: hidden;
@@ -45,7 +45,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: #F0A058;
+    color: var(--color-orange-soft);
     margin-bottom: 12px;
 }
 
@@ -54,7 +54,7 @@
     font-weight: 600;
     letter-spacing: -0.01em;
     line-height: 1.05;
-    color: #fff;
+    color: var(--color-white);
     max-width: 18ch;
     margin: 14px 0 18px;
     font-size: clamp(2.25rem, 5vw, 4rem);
@@ -92,25 +92,25 @@
 
 .gmfci-page-hero .gmfci-hero-btn-primary {
     background: linear-gradient(135deg, #A85410, #B45E14);
-    color: #fff;
+    color: var(--color-white);
     box-shadow: 0 6px 20px rgba(168, 84, 16, 0.35);
 }
 
 .gmfci-page-hero .gmfci-hero-btn-primary:hover {
     transform: translateY(-1px);
-    color: #fff;
+    color: var(--color-white);
 }
 
 .gmfci-page-hero .gmfci-hero-btn-ghost {
     background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    color: var(--color-white);
     border: 1px solid rgba(255,255,255,0.30);
     backdrop-filter: blur(6px);
 }
 
 .gmfci-page-hero .gmfci-hero-btn-ghost:hover {
     background: rgba(255,255,255,0.20);
-    color: #fff;
+    color: var(--color-white);
     transform: translateY(-1px);
 }
 

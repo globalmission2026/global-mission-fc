@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Outfit, Fraunces } from "next/font/google";
-import Script from "next/script";
+import { ErrorBoundary } from "react-error-boundary";
 import "./globals.css";
+import "../styles/tokens.css";
 
 // Import Extracted CSS
 import "../styles/navbar-standalone.css";
 import "../styles/hero.css";
 import "../styles/events-list.css";
-import "../styles/events-single.css";
 import "../styles/footer.css";
 import "../styles/videos.css";
 
@@ -48,16 +48,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} ${fraunces.variable}`}>
-      <head>
-        <link rel="stylesheet" href="/scripts/swiper-bundle.min.css" />
-      </head>
       <body>
         <UtilityNav />
         <Navbar />
-        {children}
+        <ErrorBoundary fallback={<div style={{ padding: "40px", textAlign: "center", color: "#4A1110" }}>
+          <h2>Something went wrong</h2>
+          <p style={{ color: "#6B7280", marginTop: "12px" }}>An unexpected error occurred. Please try refreshing the page.</p>
+        </div>}>
+          {children}
+        </ErrorBoundary>
         <Footer />
-        <Script src="/scripts/swiper-bundle.min.js" strategy="beforeInteractive" />
-        <Script src="/scripts/enhancements.js" strategy="lazyOnload" />
       </body>
     </html>
   );
