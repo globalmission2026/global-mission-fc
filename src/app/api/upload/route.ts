@@ -4,8 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadImage } from "@/lib/cloudinary";
 import { validateUpload } from "@/lib/upload-validation";
 
-export const runtime = "nodejs";
-
 const API_KEY = process.env.UPLOAD_API_KEY;
 
 export async function POST(request: NextRequest) {
@@ -26,8 +24,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const result = await uploadImage(buffer, { folder: "gmfc" });
+    const arrayBuffer = await file.arrayBuffer();
+    const base64 = btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)));
+    const dataUri = `data:${file.type};base64,${base64}`;
+
+    const result = await uploadImage(dataUri, { folder: "gmfc" });
 
     return NextResponse.json({ url: result.secure_url, publicId: result.public_id });
   } catch (error) {
