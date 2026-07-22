@@ -77,7 +77,6 @@ export default function ImageUpload({
             boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
             border: "1px solid rgba(0,0,0,0.05)",
             background: "#f9fafb",
-            group: "hover",
           }}
         >
           <Image
