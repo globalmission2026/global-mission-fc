@@ -1,8 +1,9 @@
-name = "global-mission-fc"
+﻿name = "global-mission-fc"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
-pages_build_output_dir = "out"
+pages_build_output_dir = ".vercel/output/static"
 
 [env.production]
 name = "global-mission-fc"
+
