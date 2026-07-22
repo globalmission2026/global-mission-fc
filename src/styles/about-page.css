@@ -414,4 +414,15 @@
 
 @media (max-width: 480px) {
     .gmfci-bishops-grid { grid-template-columns: 1fr; }
+    .gmfci-vm-grid { grid-template-columns: 1fr; }
+    .gmfci-values-list { grid-template-columns: 1fr; }
+    .gmfci-about-contact-inner { grid-template-columns: 1fr; }
+    .gmfci-vm-card { padding: 28px 20px; }
+    .gmfci-vm-section,
+    .gmfci-director-section,
+    .gmfci-bishops-section,
+    .gmfci-values-section,
+    .gmfci-about-contact { padding: 50px 16px; }
+    .gmfci-director-photo-wrap { display: none; }
+    .gmfci-director-grid { gap: 30px; }
 }

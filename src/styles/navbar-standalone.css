@@ -23,9 +23,6 @@
 /* ── Utility Bar ─────────────────────────────────────────────────────────── */
 .gmfci-utility-nav {
     display: block;
-    position: sticky;
-    top: 0;
-    z-index: 1001;
     background: var(--color-maroon);
     color: rgba(255, 255, 255, 0.85);
     font-size: 12.5px;
@@ -274,13 +271,25 @@
         margin-left: 0;
         color: var(--color-dark);
     }
-
-    .gmfci-site-header { position: relative; }
 }
 
 @media (max-width: 768px) {
-    .gmfci-utility-nav__inner { padding: 0 16px; }
+    .gmfci-utility-nav__inner { padding: 0 12px; }
     .gmfci-util-label { display: none; }
-    .gmfci-brand-top { font-size: 18px; }
-    .gmfci-brand-bottom { font-size: 12px; }
+    .gmfci-utility-nav { font-size: 11px; }
+    .gmfci-util-social { width: 26px; height: 26px; }
+    .gmfci-util-social svg { width: 13px; height: 13px; }
+
+    .gmfci-brand-top { font-size: 16px; }
+    .gmfci-brand-bottom { font-size: 10px; letter-spacing: 0.02em; }
+    .gmfci-header-inner { min-height: 64px; padding: 0 16px; }
+    .gmfci-logo-link img { max-height: 42px; }
+    .gmfci-logo-link { gap: 8px; }
+}
+
+@media (max-width: 480px) {
+    .gmfci-brand-top { font-size: 14px; }
+    .gmfci-brand-bottom { font-size: 9px; }
+    .gmfci-logo-link img { max-height: 36px; }
+    .gmfci-header-inner { min-height: 56px; gap: 6px; }
 }

@@ -269,6 +269,35 @@
         display: none;
     }
     .gmfci-scroll-indicator {
-        bottom: 200px;
+        bottom: 220px;
+    }
+    .gmfci-stat-num {
+        font-size: 1.8rem;
+    }
+    .gmfci-stat-label {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    #gmfci-hero {
+        height: 100dvh;
+        min-height: 500px;
+    }
+    .gmfci-hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.5rem);
+    }
+    .gmfci-hero-sub {
+        font-size: clamp(0.95rem, 3vw, 1.1rem);
+    }
+    .gmfci-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+    .gmfci-hero-ctas {
+        gap: 12px;
+    }
+    .gmfci-scroll-indicator {
+        bottom: 180px;
     }
 }

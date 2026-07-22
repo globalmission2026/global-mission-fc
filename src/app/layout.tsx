@@ -16,6 +16,7 @@ import "../styles/page-hero.css";
 import "../styles/about-page.css";
 import "../styles/contact-page.css";
 import "../styles/event-highlights.css";
+import "../styles/admin.css";
 
 const inter = Inter({
   variable: "--font-inter",
