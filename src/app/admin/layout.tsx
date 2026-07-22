@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { Toaster } from "sonner";
 import { LayoutDashboard, MessageSquare, Calendar, LogOut } from "lucide-react";
 import { createClient } from "@/lib/supabase-client";
 
@@ -29,6 +30,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
   return (
     <div className="gmfci-admin-layout">
+      <Toaster position="top-right" richColors />
       <aside className="gmfci-admin-sidebar">
         <div className="gmfci-admin-brand">
           <img src="/images/gmfc-logo.png" alt="GMFCI" />
@@ -62,11 +64,12 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
       <main className="gmfci-admin-main">
         <div className="gmfci-admin-topbar">
-          <h1>{navItems.find((i) => pathname === i.href || pathname.startsWith(i.href + "/"))?.label || "Admin"}</h1>
+          <h1>
+            {navItems.find((i) => pathname === i.href || pathname.startsWith(i.href + "/"))
+              ?.label || "Admin"}
+          </h1>
         </div>
-        <div className="gmfci-admin-content">
-          {children}
-        </div>
+        <div className="gmfci-admin-content">{children}</div>
       </main>
     </div>
   );

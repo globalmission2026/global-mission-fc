@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase-client";
 import { Trash2 } from "lucide-react";
 
@@ -18,21 +19,27 @@ export default function AdminMessages() {
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
-  const fetchMessages = useCallback(async () => {
-    const { data } = await supabase
-      .from("contact_messages")
-      .select("id, name, email, subject, message, created_at")
-      .order("created_at", { ascending: false });
-    setMessages(data ?? []);
-    setLoading(false);
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const { data } = await supabase
+        .from("contact_messages")
+        .select("id, name, email, subject, message, created_at")
+        .order("created_at", { ascending: false });
+      setMessages(data ?? []);
+      setLoading(false);
+    };
+    fetchMessages();
   }, []);
-
-  useEffect(() => { fetchMessages(); }, [fetchMessages]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this message?")) return;
-    await supabase.from("contact_messages").delete().eq("id", id);
-    setMessages((prev) => prev.filter((m) => m.id !== id));
+    const { error } = await supabase.from("contact_messages").delete().eq("id", id);
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Message deleted");
+      setMessages((prev) => prev.filter((m) => m.id !== id));
+    }
   };
 
   return (
@@ -67,11 +74,22 @@ export default function AdminMessages() {
                   <td>{msg.name}</td>
                   <td>{msg.email}</td>
                   <td>{msg.subject || "—"}</td>
-                  <td style={{ maxWidth: 300, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <td
+                    style={{
+                      maxWidth: 300,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
                     {msg.message}
                   </td>
                   <td>
-                    <button className="gmfci-admin-action-btn delete" onClick={() => handleDelete(msg.id)} title="Delete">
+                    <button
+                      className="gmfci-admin-action-btn delete"
+                      onClick={() => handleDelete(msg.id)}
+                      title="Delete"
+                    >
                       <Trash2 size={18} />
                     </button>
                   </td>
