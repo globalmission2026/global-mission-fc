@@ -1,1 +1,1 @@
-npm run typecheck && npm run test
+npm run typecheck && npm run test && npx @cloudflare/next-on-pages@1
