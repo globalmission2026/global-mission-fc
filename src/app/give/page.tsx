@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import { CONTACT } from "@/lib/config";
 import "../../styles/give-page.css";
+
+export const metadata: Metadata = {
+  title: "Give – Global Mission for Christ International",
+  description: "Partner with Global Mission for Christ International. Your generous gift enables us to preach the gospel, plant churches, and hold revival conferences across the nations.",
+};
 
 export default function GivePage() {
   return (

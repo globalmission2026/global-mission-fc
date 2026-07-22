@@ -34,11 +34,15 @@ export default function Navbar() {
         <span className="gmfci-nav-separator" aria-hidden="true"></span>
 
         {/* Navigation */}
-        <nav aria-label="Main navigation">
+        <nav aria-label="Main navigation"> <span id="nav-label" hidden>Main navigation</span>
           <ul className={`gmfci-main-nav${menuOpen ? " open" : ""}`}>
             {navItems.map((item) => (
               <li key={item.href} className={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href)) ? "active" : ""}>
-                <Link href={item.href} onClick={() => setMenuOpen(false)}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href)) ? "page" : undefined}
+                >
                   {item.label}
                 </Link>
               </li>

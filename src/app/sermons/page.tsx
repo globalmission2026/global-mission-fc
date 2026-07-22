@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
+
+export const metadata: Metadata = {
+  title: "Sermons & Messages – Global Mission for Christ International",
+  description: "Watch our latest sermons, worship sessions, and ministry updates on the Global Mission for Christ International YouTube channel.",
+};
 
 export default function SermonsPage() {
   return (

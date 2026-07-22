@@ -36,9 +36,26 @@ import UtilityNav from "@/components/layout/UtilityNav";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+const siteUrl = "https://globalmissionfc.org";
+
 export const metadata: Metadata = {
   title: "Global Mission for Christ International",
   description: "Propagating Revival to the Nations",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "Global Mission for Christ International",
+    description: "Propagating Revival to the Nations",
+    url: siteUrl,
+    siteName: "Global Mission for Christ International",
+    images: [{ url: "/images/hero-bg-optimized.jpg", width: 1200, height: 630 }],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Global Mission for Christ International",
+    description: "Propagating Revival to the Nations",
+    images: ["/images/hero-bg-optimized.jpg"],
+  },
 };
 
 export default function RootLayout({

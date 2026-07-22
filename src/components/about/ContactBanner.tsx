@@ -5,7 +5,7 @@ export default function ContactBanner() {
     <div className="gmfci-about-contact">
       <div className="gmfci-about-contact-inner">
         <div className="gmfci-contact-item">
-          <div className="gmfci-contact-icon">📞</div>
+          <div className="gmfci-contact-icon" aria-hidden="true">📞</div>
           <div>
             <h4>Phone</h4>
             <p>
@@ -16,21 +16,21 @@ export default function ContactBanner() {
           </div>
         </div>
         <div className="gmfci-contact-item">
-          <div className="gmfci-contact-icon">📧</div>
+          <div className="gmfci-contact-icon" aria-hidden="true">📧</div>
           <div>
             <h4>Email</h4>
             <p><a href={`mailto:${CONTACT.email}`} className="gmfci-contact-link">{CONTACT.email}</a></p>
           </div>
         </div>
         <div className="gmfci-contact-item">
-          <div className="gmfci-contact-icon">📮</div>
+          <div className="gmfci-contact-icon" aria-hidden="true">📮</div>
           <div>
             <h4>Postal Address</h4>
             <p>{CONTACT.poBox}</p>
           </div>
         </div>
         <div className="gmfci-contact-item">
-          <div className="gmfci-contact-icon">🐦</div>
+          <div className="gmfci-contact-icon" aria-hidden="true">🐦</div>
           <div>
             <h4>Follow Us</h4>
             <p>
