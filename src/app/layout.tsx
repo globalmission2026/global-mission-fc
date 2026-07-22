@@ -32,9 +32,7 @@ const fraunces = Fraunces({
   subsets: ["latin"],
 });
 
-import UtilityNav from "@/components/layout/UtilityNav";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import PublicLayout from "@/components/layout/PublicLayout";
 
 const siteUrl = "https://globalmissionfc.org";
 
@@ -66,15 +64,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable} ${fraunces.variable}`}>
       <body>
-        <UtilityNav />
-        <Navbar />
-        <ErrorBoundary fallback={<div style={{ padding: "40px", textAlign: "center", color: "#4A1110" }}>
-          <h2>Something went wrong</h2>
-          <p style={{ color: "#6B7280", marginTop: "12px" }}>An unexpected error occurred. Please try refreshing the page.</p>
-        </div>}>
-          {children}
-        </ErrorBoundary>
-        <Footer />
+        <PublicLayout>
+          <ErrorBoundary fallback={<div style={{ padding: "40px", textAlign: "center", color: "#4A1110" }}>
+            <h2>Something went wrong</h2>
+            <p style={{ color: "#6B7280", marginTop: "12px" }}>An unexpected error occurred. Please try refreshing the page.</p>
+          </div>}>
+            {children}
+          </ErrorBoundary>
+        </PublicLayout>
       </body>
     </html>
   );
