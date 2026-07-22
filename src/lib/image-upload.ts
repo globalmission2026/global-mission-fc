@@ -1,101 +1,98 @@
-import { validateUpload, ALLOWED_TYPES, MAX_SIZE } from './upload-validation'
+import { validateUpload, MAX_SIZE } from "./upload-validation";
 
-const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`
+const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`;
 
 export class UploadError extends Error {
   constructor(
     message: string,
-    public code: 'FILE_TOO_LARGE' | 'INVALID_TYPE' | 'UPLOAD_FAILED'
+    public code: "FILE_TOO_LARGE" | "INVALID_TYPE" | "UPLOAD_FAILED",
   ) {
-    super(message)
+    super(message);
   }
 }
 
 function validateFile(file: File): void {
-  const result = validateUpload(file)
+  const result = validateUpload(file);
   if (!result.valid) {
-    const code = file.size > MAX_SIZE ? 'FILE_TOO_LARGE' : 'INVALID_TYPE'
-    throw new UploadError(result.error!, code)
+    const code = file.size > MAX_SIZE ? "FILE_TOO_LARGE" : "INVALID_TYPE";
+    throw new UploadError(result.error!, code);
   }
 }
 
 async function compressImage(file: File, maxWidth = 1920, quality = 0.8): Promise<Blob> {
-  const img = new Image()
-  const url = URL.createObjectURL(file)
-  img.src = url
+  const img = new Image();
+  const url = URL.createObjectURL(file);
+  img.src = url;
 
   await new Promise((resolve, reject) => {
-    img.onload = resolve
-    img.onerror = reject
-  })
+    img.onload = resolve;
+    img.onerror = reject;
+  });
 
-  URL.revokeObjectURL(url)
+  URL.revokeObjectURL(url);
 
-  let { width, height } = img
+  let { width, height } = img;
   if (width > maxWidth) {
-    height = Math.round((height * maxWidth) / width)
-    width = maxWidth
+    height = Math.round((height * maxWidth) / width);
+    width = maxWidth;
   }
 
-  const canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = height
-  const ctx = canvas.getContext('2d')!
-  ctx.drawImage(img, 0, 0, width, height)
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d")!;
+  ctx.drawImage(img, 0, 0, width, height);
 
   return new Promise((resolve, reject) => {
     canvas.toBlob(
       (blob) => {
-        if (blob) resolve(blob)
-        else reject(new UploadError('Canvas compression failed', 'UPLOAD_FAILED'))
+        if (blob) resolve(blob);
+        else reject(new UploadError("Canvas compression failed", "UPLOAD_FAILED"));
       },
-      file.type === 'image/png' ? 'image/png' : 'image/webp',
-      quality
-    )
-  })
+      file.type === "image/png" ? "image/png" : "image/webp",
+      quality,
+    );
+  });
 }
 
 export async function uploadToCloudinary(
   file: File,
   uploadPreset: string,
-  folder = 'gmfc'
+  folder = "gmfc",
 ): Promise<{ url: string; publicId: string }> {
-  validateFile(file)
-  const compressed = await compressImage(file)
+  validateFile(file);
+  const compressed = await compressImage(file);
 
-  const formData = new FormData()
-  formData.append('file', compressed)
-  formData.append('upload_preset', uploadPreset)
-  formData.append('folder', folder)
+  const formData = new FormData();
+  formData.append("file", compressed);
+  formData.append("upload_preset", uploadPreset);
+  formData.append("folder", folder);
 
-  const res = await fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: formData })
+  const res = await fetch(CLOUDINARY_UPLOAD_URL, { method: "POST", body: formData });
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}))
+    const err = await res.json().catch(() => ({}));
     throw new UploadError(
-      (err as { error?: { message?: string } }).error?.message ?? 'Upload to Cloudinary failed',
-      'UPLOAD_FAILED'
-    )
+      (err as { error?: { message?: string } }).error?.message ?? "Upload to Cloudinary failed",
+      "UPLOAD_FAILED",
+    );
   }
 
-  const data = (await res.json()) as { secure_url: string; public_id: string }
-  return { url: data.secure_url, publicId: data.public_id }
+  const data = (await res.json()) as { secure_url: string; public_id: string };
+  return { url: data.secure_url, publicId: data.public_id };
 }
 
 export async function uploadViaApi(file: File): Promise<{ url: string; publicId: string }> {
-  validateFile(file)
-  const compressed = await compressImage(file)
+  validateFile(file);
+  const compressed = await compressImage(file);
 
-  const formData = new FormData()
-  formData.append('file', compressed)
+  const formData = new FormData();
+  formData.append("file", compressed);
 
-  const res = await fetch('/api/upload', { method: 'POST', body: formData })
+  const res = await fetch("/api/upload", { method: "POST", body: formData });
   if (!res.ok) {
-    const err = await res.json().catch(() => ({}))
-    throw new UploadError(
-      (err as { error?: string }).error ?? 'Upload failed',
-      'UPLOAD_FAILED'
-    )
+    const err = await res.json().catch(() => ({}));
+    throw new UploadError((err as { error?: string }).error ?? "Upload failed", "UPLOAD_FAILED");
   }
 
-  return res.json()
+  return res.json();
 }

@@ -29,7 +29,7 @@ export default function AdminMessages() {
       setLoading(false);
     };
     fetchMessages();
-  }, []);
+  }, [supabase]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this message?")) return;

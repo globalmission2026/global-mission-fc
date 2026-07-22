@@ -46,7 +46,7 @@ export default function EditEvent() {
       setFetching(false);
     };
     fetchEvent();
-  }, [params.id]);
+  }, [params.id, supabase]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;

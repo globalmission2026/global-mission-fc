@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Toaster } from "sonner";
 import { LayoutDashboard, MessageSquare, Calendar, LogOut } from "lucide-react";
@@ -33,7 +34,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
       <Toaster position="top-right" richColors />
       <aside className="gmfci-admin-sidebar">
         <div className="gmfci-admin-brand">
-          <img src="/images/gmfc-logo.png" alt="GMFCI" />
+          <Image src="/images/gmfc-logo.png" alt="GMFCI" width={40} height={40} />
           <h2>Admin Panel</h2>
         </div>
 

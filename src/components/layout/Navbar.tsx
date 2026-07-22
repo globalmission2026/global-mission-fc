@@ -1,16 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "Home",     href: "/" },
-  { label: "About",    href: "/about" },
-  { label: "Gallery",  href: "/gallery" },
-  { label: "Sermons",  href: "/sermons" },
-  { label: "Events",   href: "/events" },
-  { label: "Contact",  href: "/contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Sermons", href: "/sermons" },
+  { label: "Events", href: "/events" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -20,10 +21,15 @@ export default function Navbar() {
   return (
     <header className="gmfci-site-header">
       <div className="gmfci-header-inner">
-
         {/* Logo / Brand */}
         <Link href="/" className="gmfci-logo-link" onClick={() => setMenuOpen(false)}>
-          <img src="/images/gmfc-logo.png" alt="Global Mission for Christ International" className="gmfci-logo-img" />
+          <Image
+            src="/images/gmfc-logo.png"
+            alt="Global Mission for Christ International"
+            width={48}
+            height={48}
+            className="gmfci-logo-img"
+          />
           <div id="gmfci-site-brand">
             <span className="gmfci-brand-top">Global Mission</span>
             <span className="gmfci-brand-bottom">For Christ International</span>
@@ -34,14 +40,29 @@ export default function Navbar() {
         <span className="gmfci-nav-separator" aria-hidden="true"></span>
 
         {/* Navigation */}
-        <nav aria-label="Main navigation"> <span id="nav-label" hidden>Main navigation</span>
+        <nav aria-label="Main navigation">
+          {" "}
+          <span id="nav-label" hidden>
+            Main navigation
+          </span>
           <ul className={`gmfci-main-nav${menuOpen ? " open" : ""}`}>
             {navItems.map((item) => (
-              <li key={item.href} className={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href)) ? "active" : ""}>
+              <li
+                key={item.href}
+                className={
+                  pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                    ? "active"
+                    : ""
+                }
+              >
                 <Link
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
-                  aria-current={pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href)) ? "page" : undefined}
+                  aria-current={
+                    pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
+                      ? "page"
+                      : undefined
+                  }
                 >
                   {item.label}
                 </Link>
@@ -66,7 +87,6 @@ export default function Navbar() {
           <span></span>
           <span></span>
         </button>
-
       </div>
     </header>
   );

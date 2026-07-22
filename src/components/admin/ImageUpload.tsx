@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { Upload, X, Loader2 } from "lucide-react";
+import Image from "next/image";
 import { uploadToCloudinary } from "@/lib/image-upload";
 
 interface ImageUploadProps {
@@ -47,13 +48,12 @@ export default function ImageUpload({
   return (
     <div>
       {preview ? (
-        <div style={{ position: "relative", display: "inline-block" }}>
-          <img
+        <div style={{ position: "relative", display: "inline-block", width: 320, height: 180 }}>
+          <Image
             src={preview}
             alt="Preview"
+            fill
             style={{
-              width: 320,
-              height: 180,
               objectFit: "cover",
               borderRadius: 8,
               border: "1px solid #d1d5db",

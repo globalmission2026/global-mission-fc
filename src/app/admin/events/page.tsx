@@ -28,7 +28,7 @@ export default function AdminEvents() {
       setLoading(false);
     };
     fetchEvents();
-  }, []);
+  }, [supabase]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Delete this event?")) return;
