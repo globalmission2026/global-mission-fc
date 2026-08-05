@@ -1,15 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // We use @cloudflare/next-on-pages which supports SSR. Do NOT set output: 'export'.
-
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**.supabase.co" },
-
       { protocol: "https", hostname: "res.cloudinary.com" },
     ],
-    unoptimized: Boolean(process.env.CF_PAGES),
   },
 
   typescript: {
