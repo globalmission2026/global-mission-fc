@@ -16,13 +16,17 @@ interface UpcomingEvent {
 
 export default async function EventBanner() {
   const now = new Date().toISOString();
-  const { data: event } = await supabase
+  const { data: event, error } = await supabase
     .from("events")
     .select("id, title, slug, start_date, end_date, location, excerpt, image_url")
     .gte("start_date", now)
     .order("start_date", { ascending: true })
     .limit(1)
     .maybeSingle<UpcomingEvent>();
+
+  if (error) {
+    console.error("[EventBanner] Supabase error fetching upcoming event:", error);
+  }
 
   if (!event) return null;
 
