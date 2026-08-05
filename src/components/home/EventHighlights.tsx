@@ -17,23 +17,30 @@ interface Event {
 export default function EventHighlights() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const now = new Date().toISOString();
         // Fetch up to 2 upcoming events
-          const { data, error } = await supabase
-          .from('events')
-          .select('id, title, start_date, excerpt, image_url, slug')
-          .gte('start_date', now)
-          .order('start_date', { ascending: true })
+        const { data, error } = await supabase
+          .from("events")
+          .select("id, title, start_date, excerpt, image_url, slug")
+          .gte("start_date", now)
+          .order("start_date", { ascending: true })
           .limit(2);
 
-        if (error) throw error;
+        if (error) {
+          console.error("Supabase error fetching upcoming events:", error);
+          setFetchError(error.message);
+          return;
+        }
+        console.log("[EventHighlights] fetched", data?.length ?? 0, "events, now=", now);
         setEvents(data || []);
       } catch (error) {
-        console.error('Error fetching upcoming events:', error);
+        console.error("Error fetching upcoming events:", error);
+        setFetchError(String(error));
       } finally {
         setLoading(false);
       }
@@ -53,15 +60,28 @@ export default function EventHighlights() {
           <Link href="/events" className="gmfci-eh-cta-btn">
             View All Events
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clipRule="evenodd"
+              />
             </svg>
           </Link>
         </div>
 
         {loading ? (
           <div className="gmfci-eh-grid">
-            {[1, 2].map(i => (
-              <div key={i} style={{ background: "#e5e7eb", borderRadius: "16px", height: "350px", width: "100%", animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite" }}></div>
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#e5e7eb",
+                  borderRadius: "16px",
+                  height: "350px",
+                  width: "100%",
+                  animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                }}
+              ></div>
             ))}
           </div>
         ) : events.length > 0 ? (
@@ -69,14 +89,14 @@ export default function EventHighlights() {
             {events.map((event) => {
               const date = new Date(event.start_date);
               const day = date.getDate();
-              const month = date.toLocaleString('default', { month: 'short' });
+              const month = date.toLocaleString("default", { month: "short" });
 
               return (
                 <div key={event.id} className="gmfci-eh-card">
                   <div className="gmfci-eh-img-wrap">
                     {event.image_url ? (
-                      <Image 
-                        src={event.image_url} 
+                      <Image
+                        src={event.image_url}
                         alt={event.title}
                         fill
                         className="gmfci-eh-img"
@@ -84,23 +104,38 @@ export default function EventHighlights() {
                       />
                     ) : (
                       <div className="gmfci-eh-no-img">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          ></path>
+                        </svg>
                       </div>
                     )}
-                    
+
                     <div className="gmfci-eh-date-badge">
                       <span className="gmfci-eh-date-day">{day}</span>
                       <span className="gmfci-eh-date-month">{month}</span>
                     </div>
                   </div>
-                  
+
                   <div className="gmfci-eh-content">
                     <h3 className="gmfci-eh-event-title">{event.title}</h3>
                     <p className="gmfci-eh-event-excerpt">{event.excerpt}</p>
                     <Link href={`/events/${event.slug}`} className="gmfci-eh-read-more">
                       More details
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                          clipRule="evenodd"
+                        />
                       </svg>
                     </Link>
                   </div>
@@ -108,9 +143,45 @@ export default function EventHighlights() {
               );
             })}
           </div>
+        ) : fetchError ? (
+          <div
+            style={{
+              textAlign: "center",
+              padding: "60px 20px",
+              background: "#fff5f5",
+              borderRadius: "16px",
+              border: "1px solid #fecaca",
+            }}
+          >
+            <p style={{ color: "#dc2626", margin: 0, fontSize: "15px", fontWeight: 600 }}>
+              Could not load events
+            </p>
+            {process.env.NODE_ENV !== "production" && (
+              <p
+                style={{
+                  color: "#6b7280",
+                  margin: "8px 0 0",
+                  fontSize: "13px",
+                  fontFamily: "monospace",
+                }}
+              >
+                {fetchError}
+              </p>
+            )}
+          </div>
         ) : (
-          <div style={{ textAlign: "center", padding: "60px 20px", background: "white", borderRadius: "16px", border: "1px solid #f3f4f6" }}>
-            <p style={{ color: "#6b7280", margin: 0, fontSize: "16px" }}>No upcoming events right now. Check back later!</p>
+          <div
+            style={{
+              textAlign: "center",
+              padding: "60px 20px",
+              background: "white",
+              borderRadius: "16px",
+              border: "1px solid #f3f4f6",
+            }}
+          >
+            <p style={{ color: "#6b7280", margin: 0, fontSize: "16px" }}>
+              No upcoming events right now. Check back later!
+            </p>
           </div>
         )}
       </div>
