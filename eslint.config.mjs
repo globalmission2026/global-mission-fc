@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     "public/scripts/**",
     // Migration/dev artifacts
     "scripts/**",
+    // Coverage output
+    "coverage/**",
   ]),
 ]);
 
