@@ -1,4 +1,11 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://global-mission-fc.vercel.app";
+function normalizeUrl(url?: string): string {
+  if (!url || !url.trim()) return "https://global-mission-fc.vercel.app";
+  const trimmed = url.trim();
+  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+  return withProtocol.replace(/\/+$/, "");
+}
+
+export const SITE_URL = normalizeUrl(process.env.NEXT_PUBLIC_SITE_URL);
 
 export const CONTACT = {
   phones: ["+1 (512) 785 6994", "+254 721 341793", "+254 710 642 232"],
