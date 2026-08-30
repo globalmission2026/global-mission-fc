@@ -34,8 +34,9 @@ const fraunces = Fraunces({
 });
 
 import PublicLayout from "@/components/layout/PublicLayout";
+import { SITE_URL } from "@/lib/config";
 
-const siteUrl = "https://globalmissionfc.org";
+const siteUrl = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

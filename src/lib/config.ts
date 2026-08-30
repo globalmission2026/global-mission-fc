@@ -1,3 +1,5 @@
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://global-mission-fc.vercel.app";
+
 export const CONTACT = {
   phones: ["+1 (512) 785 6994", "+254 721 341793", "+254 710 642 232"],
   email: "globalmissionfc@gmail.com",
