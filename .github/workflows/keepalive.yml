@@ -1,36 +1,93 @@
-name: Supabase Keep-Alive
+name: Supabase Keep-Alive & Auto-Restore
 
-# Runs every 3 days to prevent Supabase free-tier project from being paused
-# Supabase pauses free projects after 7 days of inactivity.
+# Runs every 12 hours (at 00:00 and 12:00 UTC) to generate regular database traffic.
+# Supabase free-tier projects automatically pause after 7 days of inactivity.
 on:
   schedule:
-    # Every 3 days at 00:00 UTC (well within the 7-day pause window)
-    - cron: "0 0 */3 * *"
+    - cron: "0 */12 * * *"
   # Allow manual trigger from Actions tab
   workflow_dispatch:
 
 jobs:
-  ping:
+  keepalive:
     runs-on: ubuntu-latest
-    name: Ping Supabase to prevent inactivity pause
+    name: Keep Supabase Awake & Active
 
     steps:
-      - name: Ping Supabase REST API
+      - name: Ping Database & Auto-Restore
         env:
           SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
-          echo "Pinging Supabase at $SUPABASE_URL ..."
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "$SUPABASE_URL/rest/v1/events?select=id&limit=1" \
-            -H "apikey: $SUPABASE_ANON_KEY" \
-            -H "Authorization: Bearer $SUPABASE_ANON_KEY")
-
-          echo "HTTP Status: $HTTP_STATUS"
-
-          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 300 ]; then
-            echo "Supabase is awake and responding."
-          else
-            echo "Unexpected status $HTTP_STATUS - check Supabase dashboard."
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_ANON_KEY" ]; then
+            echo "::error::NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY is not configured in repository secrets!"
             exit 1
           fi
+
+          PROJECT_REF=$(echo "$SUPABASE_URL" | sed -E 's|https?://([^.]+)\..*|\1|')
+          echo "Supabase Project Reference: $PROJECT_REF"
+          echo "Pinging database tables to register active compute..."
+
+          # Function to perform database ping queries
+          check_database() {
+            STATUS_EVENTS=$(curl -s -o /dev/null -w "%{http_code}" \
+              "$SUPABASE_URL/rest/v1/events?select=id,title,start_date&limit=5" \
+              -H "apikey: $SUPABASE_ANON_KEY" \
+              -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+
+            STATUS_MESSAGES=$(curl -s -o /dev/null -w "%{http_code}" \
+              "$SUPABASE_URL/rest/v1/contact_messages?select=id&limit=1" \
+              -H "apikey: $SUPABASE_ANON_KEY" \
+              -H "Authorization: Bearer $SUPABASE_ANON_KEY")
+
+            echo "Query 'events' table HTTP status: $STATUS_EVENTS"
+            echo "Query 'contact_messages' table HTTP status: $STATUS_MESSAGES"
+          }
+
+          check_database
+
+          # If events query returned 2xx, the database is active and awake
+          if [ "$STATUS_EVENTS" -ge 200 ] && [ "$STATUS_EVENTS" -lt 300 ]; then
+            echo "Supabase database is ACTIVE, responding, and healthy."
+            exit 0
+          fi
+
+          # If we get here, the project is likely paused (540 / 503) or unreachable
+          echo "::warning::Supabase database returned status: events=$STATUS_EVENTS, contact_messages=$STATUS_MESSAGES"
+
+          # Check if project is paused (540 = Project Paused, 503 = Service Unavailable)
+          if [ "$STATUS_EVENTS" -eq 540 ] || [ "$STATUS_EVENTS" -eq 503 ] || [ "$STATUS_EVENTS" -eq 000 ]; then
+            echo "Project appears to be PAUSED or UNREACHABLE."
+
+            if [ -n "$SUPABASE_ACCESS_TOKEN" ]; then
+              echo "SUPABASE_ACCESS_TOKEN detected. Triggering auto-restore via Supabase Management API..."
+              RESTORE_RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X POST \
+                "https://api.supabase.com/v1/projects/$PROJECT_REF/restore" \
+                -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+                -H "Content-Type: application/json")
+
+              RESTORE_HTTP=$(echo "$RESTORE_RESPONSE" | grep "HTTP_STATUS:" | cut -d':' -f2)
+              echo "Restore request status: $RESTORE_HTTP"
+
+              if [ "$RESTORE_HTTP" -ge 200 ] && [ "$RESTORE_HTTP" -lt 300 ]; then
+                echo "Restore initiated successfully! Waiting 60 seconds for database container to boot..."
+                sleep 60
+
+                echo "Re-verifying database status..."
+                check_database
+                if [ "$STATUS_EVENTS" -ge 200 ] && [ "$STATUS_EVENTS" -lt 300 ]; then
+                  echo "Supabase database successfully restored and is now awake!"
+                  exit 0
+                fi
+              else
+                echo "::error::Restore API request failed with status $RESTORE_HTTP: $RESTORE_RESPONSE"
+              fi
+            else
+              echo "::warning::SUPABASE_ACCESS_TOKEN secret is not configured in GitHub Secrets."
+              echo "::warning::Cannot auto-restore paused project without a Supabase Personal Access Token."
+            fi
+          fi
+
+          echo "::error::Supabase project is not responding. Please manually resume it at https://supabase.com/dashboard/project/$PROJECT_REF"
+          exit 1
